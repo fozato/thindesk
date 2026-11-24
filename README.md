@@ -16,7 +16,7 @@ Sistema web de controle de chamados técnicos (help desk), desenvolvido em Java 
 
 ## Dashboard
 
-_O print do dashboard será adicionado aqui (`docs/dashboard.png`)._
+![Dashboard do Thindesk](docs/dashboard.png)
 
 ## Funcionalidades
 
@@ -37,6 +37,7 @@ _O print do dashboard será adicionado aqui (`docs/dashboard.png`)._
 | Interface | Thymeleaf + Bootstrap 5 |
 | Banco de dados | MongoDB Atlas |
 | Build | Maven (wrapper incluso) |
+| Deploy | Docker no Render (plano gratuito) |
 
 ## Como rodar localmente
 
@@ -113,10 +114,11 @@ Cada versão publicada recebe uma tag no Git (ex.: `v1.0.0`).
 
 Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
-### [1.0.0] - em desenvolvimento
+### [1.0.0] - 2026-11-24
 
 #### Adicionado
-- Dashboard com indicadores e lista dos últimos chamados
+- Deploy online no Render com Docker (`Dockerfile` e `render.yaml`)
+- Dashboard com indicadores, distribuição dos chamados por status e lista dos últimos chamados
 - Criação, edição e exclusão de chamados e clientes
 - Exclusão de horários de atendimento e validação de dia/horário
 - Mensagens de sucesso e erro nas telas
@@ -130,6 +132,7 @@ Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelo
 - Logout passou a ser feito via POST
 - Exclusões passaram a ser feitas via POST, com confirmação
 - Menu lateral e layout padronizados em todas as páginas
+- Nova interface com as cores do logo: menu com destaque da página atual, status em cores, telas de login e cadastro redesenhadas e layout adaptado para celular
 
 #### Corrigido
 - Página de erro substituída por uma página própria com mensagens para 403, 404 e demais erros

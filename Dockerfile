@@ -17,7 +17,8 @@ WORKDIR /app
 RUN useradd --system --uid 1001 thindesk
 USER thindesk
 
-COPY --from=build /app/target/thindesk-1.0.0.jar app.jar
+# O curinga evita ter que mudar esta linha a cada nova versao do pom.xml
+COPY --from=build /app/target/thindesk-*.jar app.jar
 
 # Ajustes de memoria para caber no plano gratuito (512 MB)
 ENV JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=65 -XX:+UseSerialGC -Xss512k -XX:MaxMetaspaceSize=160m -XX:ReservedCodeCacheSize=64m"

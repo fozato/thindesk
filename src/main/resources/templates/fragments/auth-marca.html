@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <!-- Painel escuro com a marca, usado no login e no cadastro -->
+        <aside th:fragment="painel" class="auth-brand">
+            <a class="brand" th:href="@{/login}">
+                <img class="brand-logo" th:src="@{/images/logo.png}" alt="">
+                <span>
+                    <span class="brand-name">Thindesk</span>
+                    <span class="brand-sub">Service Manager</span>
+                </span>
+            </a>
+
+            <div class="auth-brand-texto">
+                <h1>Chamados técnicos <span>sob controle.</span></h1>
+                <p>Abra, acompanhe e conclua os chamados de suporte da sua equipe em um só lugar.</p>
+                <ul class="auth-lista">
+                    <li><i class="bi bi-headset"></i> Chamados por status: aberto, em andamento e concluído</li>
+                    <li><i class="bi bi-people"></i> Cadastro de clientes por setor</li>
+                    <li><i class="bi bi-clock"></i> Horários de atendimento de cada setor</li>
+                </ul>
+            </div>
+
+            <div class="auth-rodape">Thindesk · Sistema de controle de chamados técnicos</div>
+        </aside>
+
+        <!-- Logo exibido no lugar do painel em telas pequenas -->
+        <a th:fragment="logo-mobile" class="brand auth-logo-mobile" th:href="@{/login}">
+            <img class="brand-logo" th:src="@{/images/logo.png}" alt="">
+            <span>
+                <span class="brand-name">Thindesk</span>
+                <span class="brand-sub">Service Manager</span>
+            </span>
+        </a>
+    </body>
+</html>

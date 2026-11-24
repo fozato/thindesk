@@ -1,99 +1,152 @@
-<div th:fragment="content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div th:fragment="content"
+     th:with="total=${totalChamados > 0 ? totalChamados : 1}">
+
+    <div class="page-head">
         <div>
-            <h2 class="mb-0">Dashboard</h2>
-            <span class="text-muted" th:text="|Olá, ${usuarioLogado}! Aqui está o resumo do atendimento.|"></span>
+            <h1>Dashboard</h1>
+            <p th:text="|Olá, ${usuarioLogado}! Aqui está o resumo do atendimento.|">Resumo do atendimento.</p>
         </div>
-        <img th:src="@{/images/logo.png}" alt="Thindesk" height="56">
+        <a th:href="@{/chamados/novo}" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Novo chamado
+        </a>
     </div>
 
     <!-- Indicadores de chamados -->
-    <div class="row g-3 mb-3">
-        <div class="col-6 col-xl-3">
-            <div class="card stat-card border-primary">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-headset"></i> Total de chamados</div>
-                    <div class="fs-2 fw-bold text-primary" th:text="${totalChamados}">0</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-xl-3">
-            <div class="card stat-card border-danger">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-exclamation-circle"></i> Abertos</div>
-                    <div class="fs-2 fw-bold text-danger" th:text="${abertos}">0</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-xl-3">
-            <div class="card stat-card border-warning">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-hourglass-split"></i> Em andamento</div>
-                    <div class="fs-2 fw-bold text-warning" th:text="${emAndamento}">0</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-xl-3">
-            <div class="card stat-card border-success">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-check-circle"></i> Concluídos</div>
-                    <div class="fs-2 fw-bold text-success" th:text="${concluidos}">0</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Indicadores de cadastros -->
     <div class="row g-3 mb-4">
         <div class="col-6 col-xl-3">
-            <div class="card stat-card border-secondary">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-people"></i> Clientes</div>
-                    <div class="fs-2 fw-bold" th:text="${totalClientes}">0</div>
+            <a th:href="@{/chamados}" class="panel stat">
+                <div class="stat-top">
+                    <span class="stat-label">Total de chamados</span>
+                    <span class="stat-icon tone-accent"><i class="bi bi-headset"></i></span>
                 </div>
-            </div>
+                <div class="stat-value" th:text="${totalChamados}">0</div>
+                <div class="stat-foot">registrados no sistema</div>
+            </a>
         </div>
         <div class="col-6 col-xl-3">
-            <div class="card stat-card border-secondary">
-                <div class="card-body">
-                    <div class="text-muted small"><i class="bi bi-alarm"></i> Horários cadastrados</div>
-                    <div class="fs-2 fw-bold" th:text="${totalHorarios}">0</div>
+            <a th:href="@{/chamados}" class="panel stat">
+                <div class="stat-top">
+                    <span class="stat-label">Abertos</span>
+                    <span class="stat-icon tone-aberto"><i class="bi bi-exclamation-circle"></i></span>
                 </div>
-            </div>
+                <div class="stat-value" th:text="${abertos}">0</div>
+                <div class="stat-foot">aguardando atendimento</div>
+            </a>
+        </div>
+        <div class="col-6 col-xl-3">
+            <a th:href="@{/chamados}" class="panel stat">
+                <div class="stat-top">
+                    <span class="stat-label">Em andamento</span>
+                    <span class="stat-icon tone-andamento"><i class="bi bi-hourglass-split"></i></span>
+                </div>
+                <div class="stat-value" th:text="${emAndamento}">0</div>
+                <div class="stat-foot">com um técnico</div>
+            </a>
+        </div>
+        <div class="col-6 col-xl-3">
+            <a th:href="@{/chamados}" class="panel stat">
+                <div class="stat-top">
+                    <span class="stat-label">Concluídos</span>
+                    <span class="stat-icon tone-concluido"><i class="bi bi-check2-circle"></i></span>
+                </div>
+                <div class="stat-value" th:text="${concluidos}">0</div>
+                <div class="stat-foot">resolvidos</div>
+            </a>
         </div>
     </div>
 
-    <!-- Últimos chamados -->
-    <div class="card shadow-sm border-0">
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <strong>Últimos chamados</strong>
-            <a th:href="@{/chamados}" class="btn btn-sm btn-outline-primary">Ver todos</a>
+    <div class="row g-3">
+        <!-- Ultimos chamados -->
+        <div class="col-xl-8">
+            <section class="panel h-100">
+                <div class="panel-head">
+                    <h2>Últimos chamados</h2>
+                    <a th:href="@{/chamados}" class="link-seta">Ver todos <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Tipo</th>
+                                <th>Técnico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="c : ${ultimosChamados}">
+                                <td class="cel-principal" th:text="${c.descricao}"></td>
+                                <td><span class="status-pill" th:classappend="${@statusChamado.badge(c.status)}"
+                                          th:text="${@statusChamado.label(c.status)}"></span></td>
+                                <td>
+                                    <span th:if="${c.tipo}" class="chip" th:text="${c.tipo}"></span>
+                                    <span th:unless="${c.tipo}" class="cel-vazia">—</span>
+                                </td>
+                                <td class="text-nowrap" th:text="${c.tecnico} ?: '—'" th:classappend="${c.tecnico} ? '' : 'cel-vazia'"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(ultimosChamados)}">
+                                <td colspan="4" class="vazio">
+                                    <i class="bi bi-inbox"></i>
+                                    Nenhum chamado ainda. <a th:href="@{/chamados/novo}">Abrir o primeiro chamado</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover mb-0 align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                        <th>Tipo</th>
-                        <th>Técnico</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="c : ${ultimosChamados}">
-                        <td th:text="${c.descricao}"></td>
-                        <td><span class="badge" th:classappend="${@statusChamado.badge(c.status)}"
-                                  th:text="${@statusChamado.label(c.status)}"></span></td>
-                        <td th:text="${c.tipo} ?: '—'"></td>
-                        <td th:text="${c.tecnico} ?: '—'"></td>
-                    </tr>
-                    <tr th:if="${#lists.isEmpty(ultimosChamados)}">
-                        <td colspan="4" class="text-center text-muted py-4">
-                            Nenhum chamado ainda. <a th:href="@{/chamados/novo}">Abrir o primeiro chamado</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="col-xl-4 d-flex flex-column gap-3">
+            <!-- Situacao dos chamados -->
+            <section class="panel">
+                <div class="panel-head">
+                    <h2>Situação dos chamados</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="dist-bar" role="img"
+                         th:attr="aria-label=|${abertos} abertos, ${emAndamento} em andamento, ${concluidos} concluídos|">
+                        <span class="seg-aberto" th:if="${abertos > 0}" th:style="|flex-grow: ${abertos}|"></span>
+                        <span class="seg-andamento" th:if="${emAndamento > 0}" th:style="|flex-grow: ${emAndamento}|"></span>
+                        <span class="seg-concluido" th:if="${concluidos > 0}" th:style="|flex-grow: ${concluidos}|"></span>
+                    </div>
+                    <ul class="dist-legend">
+                        <li>
+                            <span class="dot" style="background: #e0614f;"></span> Abertos
+                            <span class="qtd" th:text="${abertos}">0</span>
+                            <span class="pct" th:text="|${(abertos * 100 + total / 2) / total}%|">0%</span>
+                        </li>
+                        <li>
+                            <span class="dot" style="background: #f0b43c;"></span> Em andamento
+                            <span class="qtd" th:text="${emAndamento}">0</span>
+                            <span class="pct" th:text="|${(emAndamento * 100 + total / 2) / total}%|">0%</span>
+                        </li>
+                        <li>
+                            <span class="dot" style="background: #3aa36a;"></span> Concluídos
+                            <span class="qtd" th:text="${concluidos}">0</span>
+                            <span class="pct" th:text="|${(concluidos * 100 + total / 2) / total}%|">0%</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Cadastros -->
+            <section class="panel flex-grow-1">
+                <div class="panel-head">
+                    <h2>Cadastros</h2>
+                </div>
+                <a th:href="@{/clientes}" class="atalho" style="border-top: 0;">
+                    <span class="stat-icon tone-ink"><i class="bi bi-people"></i></span>
+                    <span class="atalho-nome">Clientes</span>
+                    <span class="atalho-qtd" th:text="${totalClientes}">0</span>
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+                <a th:href="@{/ajustes-horarios}" class="atalho">
+                    <span class="stat-icon tone-ink"><i class="bi bi-clock"></i></span>
+                    <span class="atalho-nome">Horários de atendimento</span>
+                    <span class="atalho-qtd" th:text="${totalHorarios}">0</span>
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </section>
         </div>
     </div>
 </div>

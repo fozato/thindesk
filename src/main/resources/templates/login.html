@@ -1,68 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
-    <!-- Link para o CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <style>
-        /* Estilos adicionais para centralizar o card de login */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f8f9fa;
-        }
-        .login-card {
-            max-width: 400px;
-            width: 100%;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            background-color: #ffffff;
-        }
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - ThinDesk</title>
+    <th:block th:replace="~{fragments/head :: recursos}"></th:block>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-card text-center">
-            <!-- Espaço para a logo -->
-            <img th:src="@{/images/logo.png}" alt="Logo" class="logo">
-            <h3 class="mb-4">Bem-vindo</h3>
+    <div class="auth">
+        <div th:replace="~{fragments/auth-marca :: painel}"></div>
 
-            <!-- Mensagens de retorno -->
-            <div th:if="${param.error}" class="alert alert-danger py-2">Usuário ou senha inválidos.</div>
-            <div th:if="${param.logout}" class="alert alert-info py-2">Você saiu do sistema.</div>
-            <div th:if="${param.registrado}" class="alert alert-success py-2">Conta criada! Faça login para continuar.</div>
+        <main class="auth-form">
+            <div class="auth-card">
+                <div th:replace="~{fragments/auth-marca :: logo-mobile}"></div>
 
-            <!-- Formulário de Login (o Thymeleaf adiciona o token CSRF automaticamente) -->
-            <form th:action="@{/login}" method="post">
-                <div class="form-group mb-3">
-                    <label for="username" class="form-label">Usuário</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+                <h2>Entrar</h2>
+                <p class="sub">Use seu usuário e senha para acessar o painel.</p>
+
+                <!-- Mensagens de retorno -->
+                <div th:if="${param.error}" class="alert alert-danger py-2"><i class="bi bi-exclamation-triangle-fill"></i> Usuário ou senha inválidos.</div>
+                <div th:if="${param.logout}" class="alert alert-info py-2"><i class="bi bi-info-circle-fill"></i> Você saiu do sistema.</div>
+                <div th:if="${param.registrado}" class="alert alert-success py-2"><i class="bi bi-check-circle-fill"></i> Conta criada! Faça login para continuar.</div>
+
+                <!-- Formulario de login (o Thymeleaf adiciona o token CSRF automaticamente) -->
+                <form th:action="@{/login}" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Usuário</label>
+                        <div class="campo-icone">
+                            <i class="bi bi-person"></i>
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="Seu nome de usuário" autocomplete="username" required autofocus>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Senha</label>
+                        <div class="campo-icone">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Sua senha" autocomplete="current-password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Entrar <i class="bi bi-arrow-right"></i></button>
+                </form>
+
+                <!-- Link para cadastro -->
+                <div class="auth-troca">
+                    Não tem conta? <a th:href="@{/registro}">Criar conta</a>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
-            
-            <!-- Link para cadastro -->
-            <div class="mt-3">
-                Não tem conta? <a th:href="@{/registro}" class="text-decoration-none">Criar conta</a>
             </div>
-        </div>
+        </main>
     </div>
-    
-    <!-- Link para o JS do Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

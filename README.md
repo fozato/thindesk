@@ -9,7 +9,7 @@ Sistema web de controle de chamados técnicos (help desk), desenvolvido em Java 
 
 ## Acesso online
 
-- **Aplicação:** _link do deploy será adicionado aqui_
+- **Aplicação:** https://thindesk-gldv.onrender.com
 - **Como entrar:** acesse o link, clique em **Criar conta**, cadastre um usuário e faça login.
 
 > A hospedagem gratuita pode "dormir" quando fica sem uso. O primeiro acesso pode levar até 1 minuto.

@@ -41,10 +41,10 @@ public class StatusChamado {
 
     public String badge(String status) {
         return switch (normalizar(status)) {
-            case ABERTO -> "text-bg-danger";
-            case EM_ANDAMENTO -> "text-bg-warning";
-            case CONCLUIDO -> "text-bg-success";
-            default -> "text-bg-secondary";
+            case ABERTO -> "st-aberto";
+            case EM_ANDAMENTO -> "st-andamento";
+            case CONCLUIDO -> "st-concluido";
+            default -> "st-outro";
         };
     }
 }

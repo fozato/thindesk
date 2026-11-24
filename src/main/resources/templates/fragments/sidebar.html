@@ -5,42 +5,60 @@
     </head>
     <body>
         <div th:fragment="sidebar">
-            <div id="sidebar" class="d-flex flex-column">
-                <h4 class="text-center py-3">Thindesk</h4>
+            <nav id="sidebar" class="d-flex flex-column" aria-label="Menu principal">
+                <a class="brand" th:href="@{/}">
+                    <img class="brand-logo" th:src="@{/images/logo.png}" alt="">
+                    <span>
+                        <span class="brand-name">Thindesk</span>
+                        <span class="brand-sub">Service Manager</span>
+                    </span>
+                </a>
+
+                <div class="nav-label">Menu</div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">
-                            <i class="bi bi-speedometer2"></i> Dashboard
+                        <a class="nav-link" th:href="@{/}"
+                           th:classappend="${paginaAtual == '/'} ? 'active'"
+                           th:attr="aria-current=${paginaAtual == '/'} ? 'page'">
+                            <i class="bi bi-grid-1x2"></i> Dashboard
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/chamados}">
+                    <li class="nav-item" th:with="ativo=${paginaAtual != null and #strings.startsWith(paginaAtual, '/chamados')}">
+                        <a class="nav-link" th:href="@{/chamados}"
+                           th:classappend="${ativo} ? 'active'" th:attr="aria-current=${ativo} ? 'page'">
                             <i class="bi bi-headset"></i> Chamados
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/clientes}">
+                    <li class="nav-item" th:with="ativo=${paginaAtual != null and #strings.startsWith(paginaAtual, '/clientes')}">
+                        <a class="nav-link" th:href="@{/clientes}"
+                           th:classappend="${ativo} ? 'active'" th:attr="aria-current=${ativo} ? 'page'">
                             <i class="bi bi-people"></i> Clientes
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/ajustes-horarios}">
-                            <i class="bi bi-alarm"></i> Horários de Atendimento
+                    <li class="nav-item" th:with="ativo=${paginaAtual != null and #strings.startsWith(paginaAtual, '/ajustes-horarios')}">
+                        <a class="nav-link" th:href="@{/ajustes-horarios}"
+                           th:classappend="${ativo} ? 'active'" th:attr="aria-current=${ativo} ? 'page'">
+                            <i class="bi bi-clock"></i> Horários
                         </a>
                     </li>
                 </ul>
-                <div class="mt-auto px-3 pb-3">
-                    <div class="small text-white-50 mb-2" th:if="${usuarioLogado}">
-                        <i class="bi bi-person-circle"></i> <span th:text="${usuarioLogado}"></span>
+
+                <div class="mt-auto">
+                    <div class="user-box" th:if="${usuarioLogado}">
+                        <span class="avatar" th:text="${#strings.substring(usuarioLogado, 0, 1)}">U</span>
+                        <div class="min-w-0" style="min-width: 0;">
+                            <div class="user-name" th:text="${usuarioLogado}">usuario</div>
+                            <div class="user-role">Conectado</div>
+                        </div>
                     </div>
                     <!-- Logout via POST (o Thymeleaf adiciona o token CSRF) -->
                     <form th:action="@{/logout}" method="post">
-                        <button type="submit" class="btn btn-outline-light btn-sm w-100">
+                        <button type="submit" class="btn-sair">
                             <i class="bi bi-box-arrow-right"></i> Sair
                         </button>
                     </form>
                 </div>
-            </div>
+            </nav>
         </div>
     </body>
 </html>

@@ -3,11 +3,11 @@
     <body>
         <div th:fragment="alertas">
             <div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-check-circle"></i> <span th:text="${sucesso}"></span>
+                <i class="bi bi-check-circle-fill"></i> <span th:text="${sucesso}"></span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
             <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-exclamation-triangle"></i> <span th:text="${erro}"></span>
+                <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${erro}"></span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
         </div>

@@ -262,5 +262,3 @@ Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelo
 ## Autor
 
 Victor Fozato — [@fozato](https://github.com/fozato)
-
-Projeto acadêmico desenvolvido para a Atividade Prática M2, a partir da base apresentada em sala.

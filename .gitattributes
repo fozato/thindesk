@@ -1,0 +1,16 @@
+# Normaliza quebras de linha no repositorio
+* text=auto
+
+# Scripts precisam manter o formato do sistema em que rodam
+mvnw text eol=lf
+*.sh text eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary

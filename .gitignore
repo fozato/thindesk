@@ -1,0 +1,23 @@
+# Build (Maven)
+target/
+!.mvn/wrapper/maven-wrapper.properties
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+nbproject/private/
+
+# Variaveis de ambiente e configuracoes locais (podem conter segredos)
+.env
+.env.*
+!.env.example
+*.local.properties
+application-local.properties
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log

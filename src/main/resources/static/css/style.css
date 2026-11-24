@@ -35,6 +35,26 @@ body {
 #content {
     flex-grow: 1;
     padding: 20px;
+    min-width: 0;
+    background-color: #f8f9fa;
+}
+
+/* Cartões de indicadores do dashboard */
+.stat-card {
+    border-width: 0 0 0 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Largura máxima dos formulários */
+.form-card {
+    max-width: 760px;
+}
+
+@media (min-width: 769px) {
+    #sidebar {
+        position: sticky;
+        top: 0;
+    }
 }
 
 @media (max-width: 768px) {

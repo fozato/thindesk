@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title th:text="${chamado.id != null} ? 'Editar chamado - Thindesk' : 'Novo chamado - Thindesk'">Chamado - Thindesk</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+
+    <body>
+        <div class="toggle-btn btn btn-dark d-md-none">
+            <span>&#9776;</span>
+        </div>
+
+        <aside>
+            <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        </aside>
+
+        <main id="content">
+            <h2 class="mb-4" th:text="${chamado.id != null} ? 'Editar chamado' : 'Novo chamado'">Chamado</h2>
+
+            <div th:replace="~{fragments/alertas :: alertas}"></div>
+
+            <form th:action="@{/chamados/salvar}" th:object="${chamado}" method="post"
+                  class="card card-body shadow-sm border-0 form-card">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição *</label>
+                    <textarea th:field="*{descricao}" id="descricao" class="form-control" rows="3"
+                              maxlength="500" required placeholder="Descreva o problema"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select th:field="*{status}" id="status" class="form-select">
+                            <option th:each="s : ${@statusChamado.valores}" th:value="${s}"
+                                    th:text="${@statusChamado.label(s)}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <input type="text" th:field="*{tipo}" id="tipo" class="form-control" list="tipos"
+                               maxlength="60" placeholder="Ex.: Hardware">
+                        <datalist id="tipos">
+                            <option value="Hardware"></option>
+                            <option value="Software"></option>
+                            <option value="Rede"></option>
+                            <option value="Impressora"></option>
+                            <option value="Acesso / Senha"></option>
+                        </datalist>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="tecnico" class="form-label">Técnico</label>
+                        <input type="text" th:field="*{tecnico}" id="tecnico" class="form-control" maxlength="80">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="usuario" class="form-label">Usuário solicitante</label>
+                        <input type="text" th:field="*{usuario}" id="usuario" class="form-control" maxlength="80">
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Salvar</button>
+                    <a th:href="@{/chamados}" class="btn btn-outline-secondary">Cancelar</a>
+                </div>
+            </form>
+        </main>
+
+        <script th:src="@{/js/script.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

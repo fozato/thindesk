@@ -27,4 +27,12 @@ public class HorarioAtendimentoService {
     public void deletar(String id) {
         horarioAtendimentoRepository.deleteById(id);
     }
+
+    public boolean existe(String id) {
+        return horarioAtendimentoRepository.existsById(id);
+    }
+
+    public long contar() {
+        return horarioAtendimentoRepository.count();
+    }
 }

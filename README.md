@@ -20,10 +20,13 @@ _O print do dashboard será adicionado aqui (`docs/dashboard.png`)._
 
 ## Funcionalidades
 
+- **Dashboard** com indicadores de chamados (total, abertos, em andamento, concluídos), clientes, horários e últimos chamados
+- **Chamados**: abrir, editar (status, tipo, técnico, solicitante) e excluir
+- **Clientes**: cadastrar, editar e excluir
+- **Horários de atendimento** por setor e dia da semana, com validação de horário
 - Login com usuários cadastrados no MongoDB (senhas armazenadas com hash BCrypt)
 - Cadastro de novos usuários
 - Proteção contra CSRF em todos os formulários
-- Listagem de chamados, clientes e horários de atendimento por setor
 
 ## Tecnologias
 
@@ -112,18 +115,30 @@ Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelo
 ### [1.0.0] - em desenvolvimento
 
 #### Adicionado
+- Dashboard com indicadores e lista dos últimos chamados
+- Criação, edição e exclusão de chamados e clientes
+- Exclusão de horários de atendimento e validação de dia/horário
+- Mensagens de sucesso e erro nas telas
 - Cadastro de usuários e login com usuários armazenados no MongoDB, com senha em BCrypt
-- Botão de logout
+- Botão de logout e nome do usuário logado no menu
 - Mensagens de erro, logout e cadastro na tela de login
 - Configuração por variáveis de ambiente (`MONGODB_URI`, `MONGODB_DATABASE`, `PORT`) e arquivo `.env.example`
 
 #### Alterado
 - Empacotamento de `war` para `jar` executável
 - Logout passou a ser feito via POST
+- Exclusões passaram a ser feitas via POST, com confirmação
+- Menu lateral e layout padronizados em todas as páginas
+
+#### Corrigido
+- Tela de horários de atendimento, que não salvava nem listava os registros
+- Botões de novo/editar/excluir que levavam a páginas inexistentes
+- Erro ao receber parâmetros nas rotas (compilação com `-parameters`)
 
 #### Removido
 - Credenciais do banco e do usuário fixas no código
 - Dependências Java EE não utilizadas
+- Itens do menu sem funcionalidade (Técnicos, Tipo de Chamado, Recursos)
 
 #### Segurança
 - Proteção CSRF reativada

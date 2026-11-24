@@ -82,9 +82,26 @@ Acesse `http://localhost:8080`.
 java -jar target/thindesk-1.0.0.jar
 ```
 
+## Deploy
+
+A aplicação publicada roda no [Render](https://render.com) (plano gratuito), em um contêiner Docker:
+
+1. O `Dockerfile` compila o projeto com Maven e gera uma imagem enxuta, só com o JRE 21 e o `.jar`.
+2. O `render.yaml` (Blueprint) descreve o serviço web: plano gratuito, verificação de saúde em `/login`, banco `thindesk` e cache de templates ligado.
+3. A variável `MONGODB_URI` é informada só no painel do Render, nunca no repositório.
+4. No MongoDB Atlas, em **Network Access**, o acesso é liberado para `0.0.0.0/0`, já que o Render não tem IP fixo no plano gratuito.
+
+A cada `push` na branch `main`, o Render gera uma nova imagem e publica a versão atualizada automaticamente.
+
 ## Estrutura do projeto
 
 ```
+├── Dockerfile                    # Build e imagem de produção
+├── render.yaml                   # Configuração do deploy no Render
+├── .env.example                  # Modelo das variáveis de ambiente
+├── docs/dashboard.png            # Print usado neste README
+└── pom.xml                       # Dependências e build (Maven)
+
 src/main/java/com/pfc
 ├── ThindeskApplication.java      # Classe principal
 ├── SecurityConfig.java           # Configuração de segurança (login, CSRF, BCrypt)

@@ -52,8 +52,9 @@ As credenciais **não** ficam no código. A aplicação lê as variáveis de amb
 | Variável | Obrigatória | Descrição |
 |---|---|---|
 | `MONGODB_URI` | Sim | URI de conexão do MongoDB |
-| `MONGODB_DATABASE` | Não | Nome do banco (padrão: `thindesk`) |
+| `MONGODB_DATABASE` | Não | Nome do banco (padrão: `thindesk`; recomenda-se `thindesk_dev` no desenvolvimento) |
 | `PORT` | Não | Porta HTTP (padrão: `8080`) |
+| `THYMELEAF_CACHE` | Não | Cache de templates (padrão: `false`; use `true` em produção) |
 
 Para desenvolvimento, copie o arquivo de exemplo e preencha com seus dados (o `.env` é ignorado pelo Git):
 
@@ -131,6 +132,7 @@ Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelo
 - Menu lateral e layout padronizados em todas as páginas
 
 #### Corrigido
+- Página de erro substituída por uma página própria com mensagens para 403, 404 e demais erros
 - Tela de horários de atendimento, que não salvava nem listava os registros
 - Botões de novo/editar/excluir que levavam a páginas inexistentes
 - Erro ao receber parâmetros nas rotas (compilação com `-parameters`)
@@ -139,6 +141,7 @@ Todas as mudanças relevantes são registradas aqui, no formato [Keep a Changelo
 - Credenciais do banco e do usuário fixas no código
 - Dependências Java EE não utilizadas
 - Itens do menu sem funcionalidade (Técnicos, Tipo de Chamado, Recursos)
+- Arquivos de configuração do NetBeans e dados de exemplo não utilizados
 
 #### Segurança
 - Proteção CSRF reativada

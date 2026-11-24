@@ -1,0 +1,14 @@
+# Configuracao de deploy no Render (Blueprint)
+services:
+  - type: web
+    name: thindesk
+    runtime: docker
+    plan: free
+    healthCheckPath: /login
+    envVars:
+      - key: MONGODB_URI
+        sync: false # valor informado no painel do Render, nunca no repositorio
+      - key: MONGODB_DATABASE
+        value: thindesk
+      - key: THYMELEAF_CACHE
+        value: "true"

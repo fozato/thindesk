@@ -1,0 +1,14 @@
+# Nada disso deve entrar na imagem
+.git
+.gitignore
+.gitattributes
+.idea
+*.iml
+.vscode
+target
+.env
+.env.*
+*.local.properties
+*.log
+docs
+README.md
